@@ -1,0 +1,191 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --primary-600: #059669;
+  --primary-700: #047857;
+  --primary-400: #34d399;
+  --secondary-600: #ea580c;
+  --secondary-700: #c2410c;
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-400: #9ca3af;
+}
+
+[data-theme="light"] {
+  --gray-900: #ffffff;
+  --gray-800: #f9fafb;
+  --gray-700: #e5e7eb;
+  --gray-600: #d1d5db;
+  --gray-400: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+.category-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.6s ease;
+}
+
+.category-card:hover::before {
+  transform: scale(1);
+}
+
+.form-input {
+  @apply w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200;
+}
+
+.btn-primary {
+  @apply bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200;
+}
+
+.message-success {
+  @apply bg-emerald-600 text-white p-4 rounded-lg shadow-lg flex items-center space-x-3 animate-slide-in;
+}
+
+.message-error {
+  @apply bg-red-600 text-white p-4 rounded-lg shadow-lg flex items-center space-x-3 animate-slide-in;
+}
+
+.message-info {
+  @apply bg-blue-600 text-white p-4 rounded-lg shadow-lg flex items-center space-x-3 animate-slide-in;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.payment-method-card {
+  @apply bg-gray-700 border-2 border-gray-600 rounded-lg p-4 cursor-pointer transition-all duration-200;
+}
+
+.payment-method-card:hover {
+  @apply border-emerald-500 bg-gray-600;
+}
+
+.payment-method-card.selected {
+  @apply border-emerald-400 bg-emerald-600/10;
+}
+
+.chat-message {
+  @apply p-3 rounded-lg max-w-xs;
+}
+
+.chat-message.user {
+  @apply bg-emerald-600 text-white ml-auto;
+}
+
+.chat-message.bot {
+  @apply bg-gray-700 text-gray-100 mr-auto;
+}
+
+.loading-dots {
+  display: inline-block;
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .category-card {
+    padding: 1.5rem;
+  }
+  
+  .form-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .category-card {
+    border: 2px solid currentColor;
+  }
+  
+  .form-input {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Styles */
+.focus-visible {
+  @apply ring-2 ring-emerald-500 ring-offset-2 ring-offset-gray-900;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
