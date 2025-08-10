@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growtopia Shop - Premium RGT & RPS Services</title>
+    <meta name="description" content="Trusted Growtopia shop for Diamond Locks, Blue Gem Locks, and premium RPS items. Fast delivery, secure payment.">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-2 bg-emerald-600 rounded-full shadow-lg hover:bg-emerald-700 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+    </button>
+
+    <!-- Language Toggle -->
+    <div class="fixed top-4 right-16 z-50">
+        <select id="languageSelect" class="bg-gray-800 border border-gray-600 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-emerald-500">
+            <option value="en">EN</option>
+            <option value="id">ID</option>
+        </select>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-gray-800 shadow-xl border-b border-emerald-500/20">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 11l3-3 3 3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 id="websiteName" class="text-2xl font-bold text-emerald-400">Loading...</h1>
+                        <p class="text-gray-400 text-sm" data-i18n="header.subtitle">Premium Growtopia Services</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="customerServiceBtn" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors" data-i18n="header.support">
+                        Support Chat
+                    </button>
+                    <button id="loginBtn" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg transition-colors" data-i18n="auth.login">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home View -->
+        <div id="homeView" class="space-y-8">
+            <!-- Hero Section -->
+            <div class="text-center py-12">
+                <h2 class="text-4xl font-bold mb-4" data-i18n="home.hero.title">Welcome to the Best Growtopia Shop</h2>
+                <p class="text-xl text-gray-400 mb-8" data-i18n="home.hero.description">Fast, secure, and reliable service for all your Growtopia needs</p>
+                
+                <!-- Product Categories -->
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- RGT Category -->
+                    <div class="category-card bg-gradient-to-br from-emerald-600 to-emerald-800 p-8 rounded-xl shadow-2xl cursor-pointer transform transition-all hover:scale-105 hover:shadow-3xl" data-category="rgt">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2" data-i18n="categories.rgt.title">RGT Services</h3>
+                            <p class="text-emerald-100" data-i18n="categories.rgt.description">Diamond Locks & Blue Gem Locks</p>
+                            <p class="text-sm text-emerald-200 mt-2" data-i18n="categories.rgt.note">Fast delivery to your world</p>
+                        </div>
+                    </div>
+
+                    <!-- RPS Category -->
+                    <div class="category-card bg-gradient-to-br from-orange-600 to-orange-800 p-8 rounded-xl shadow-2xl cursor-pointer transform transition-all hover:scale-105 hover:shadow-3xl" data-category="rps">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2" data-i18n="categories.rps.title">RPS Items</h3>
+                            <p class="text-orange-100" data-i18n="categories.rps.description">Premium custom items & services</p>
+                            <p class="text-sm text-orange-200 mt-2" data-i18n="categories.rps.note">Special items for your collection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="grid md:grid-cols-3 gap-6 py-8">
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-emerald-600/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="features.fast.title">Fast Delivery</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="features.fast.description">Quick processing within minutes</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-emerald-600/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="features.secure.title">Secure Payment</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="features.secure.description">Safe and encrypted transactions</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 bg-emerald-600/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M12 12h.01M12 12h.01M12 12h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold mb-2" data-i18n="features.support.title">24/7 Support</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="features.support.description">Always here to help you</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchase Forms Container -->
+        <div id="purchaseView" class="hidden">
+            <div class="max-w-2xl mx-auto">
+                <button id="backToHome" class="mb-6 flex items-center text-emerald-400 hover:text-emerald-300 transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    <span data-i18n="navigation.back">Back to Home</span>
+                </button>
+
+                <div class="bg-gray-800 rounded-xl shadow-2xl p-8">
+                    <div class="text-center mb-8">
+                        <h2 id="purchaseTitle" class="text-3xl font-bold text-emerald-400 mb-2">Purchase Form</h2>
+                        <p id="purchaseDescription" class="text-gray-400">Fill out the form below to place your order</p>
+                    </div>
+
+                    <form id="purchaseForm" class="space-y-6">
+                        <!-- Basic Information -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="world" class="block text-sm font-medium mb-2" data-i18n="form.world">World Name</label>
+                                <input type="text" id="world" name="world" required maxlength="30" 
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                       data-i18n="form.world.placeholder" placeholder="Enter world name">
+                            </div>
+                            <div>
+                                <label for="growId" class="block text-sm font-medium mb-2" data-i18n="form.growid">GrowID</label>
+                                <input type="text" id="growId" name="growId" required maxlength="30"
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                       data-i18n="form.growid.placeholder" placeholder="Enter your GrowID">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="customerName" class="block text-sm font-medium mb-2" data-i18n="form.name">Full Name</label>
+                                <input type="text" id="customerName" name="customerName" required maxlength="50"
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                       data-i18n="form.name.placeholder" placeholder="Enter your full name">
+                            </div>
+                            <div>
+                                <label for="whatsappNumber" class="block text-sm font-medium mb-2" data-i18n="form.whatsapp">WhatsApp Number</label>
+                                <input type="tel" id="whatsappNumber" name="whatsappNumber" required
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                       placeholder="+62812xxxxxxxx">
+                            </div>
+                        </div>
+
+                        <!-- Product Selection -->
+                        <div id="productSelection">
+                            <!-- Will be populated dynamically -->
+                        </div>
+
+                        <!-- Quantity and Price -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="quantity" class="block text-sm font-medium mb-2" data-i18n="form.quantity">Quantity</label>
+                                <input type="number" id="quantity" name="quantity" min="1" value="1" required
+                                       class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="totalPrice" class="block text-sm font-medium mb-2" data-i18n="form.total">Total Price</label>
+                                <input type="text" id="totalPrice" name="totalPrice" readonly
+                                       class="w-full bg-gray-600 border border-gray-500 rounded-lg px-4 py-3 text-emerald-400 font-bold">
+                            </div>
+                        </div>
+
+                        <!-- Special Notes for RPS -->
+                        <div id="specialNotes" class="hidden">
+                            <label for="notes" class="block text-sm font-medium mb-2" data-i18n="form.notes">Special Instructions</label>
+                            <textarea id="notes" name="notes" rows="3" maxlength="500"
+                                      class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                      data-i18n="form.notes.placeholder" placeholder="Any special requests or instructions (optional)"></textarea>
+                        </div>
+
+                        <!-- Captcha Section -->
+                        <div id="captchaSection" class="border-t border-gray-600 pt-6">
+                            <h3 class="text-lg font-semibold mb-4" data-i18n="captcha.title">Security Verification</h3>
+                            <div class="bg-gray-700 rounded-lg p-6 text-center">
+                                <div id="captchaContainer" class="mb-4">
+                                    <img id="captchaImage" src="" alt="Captcha" class="mx-auto rounded border mb-4 max-w-xs">
+                                    <button type="button" id="refreshCaptcha" class="text-emerald-400 hover:text-emerald-300 text-sm" data-i18n="captcha.refresh">
+                                        🔄 Refresh Captcha
+                                    </button>
+                                </div>
+                                <input type="text" id="captchaAnswer" name="captchaAnswer" required
+                                       class="w-full max-w-xs bg-gray-600 border border-gray-500 rounded-lg px-4 py-2 text-center focus:ring-2 focus:ring-emerald-500"
+                                       data-i18n="captcha.placeholder" placeholder="Enter the text you see">
+                                <input type="hidden" id="captchaId" name="captchaId">
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods (Hidden initially) -->
+                        <div id="paymentSection" class="hidden border-t border-gray-600 pt-6">
+                            <h3 class="text-lg font-semibold mb-4" data-i18n="payment.title">Payment Methods</h3>
+                            <div id="paymentMethods" class="space-y-4">
+                                <!-- Will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitBtn" 
+                                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-lg transition-colors transform hover:scale-105"
+                                data-i18n="form.submit">
+                            Verify Captcha to Continue
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="authTitle" class="text-2xl font-bold" data-i18n="auth.title">Login / Register</h2>
+                    <button id="closeAuthModal" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="authContent">
+                    <!-- Firebase Auth UI will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Service Chat Modal -->
+    <div id="chatModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl h-96 flex flex-col">
+                <div class="flex justify-between items-center p-6 border-b border-gray-600">
+                    <h2 class="text-xl font-bold" data-i18n="chat.title">Customer Support</h2>
+                    <button id="closeChatModal" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                    <div class="text-center text-gray-400 py-4" data-i18n="chat.welcome">
+                        Welcome! How can we help you today?
+                    </div>
+                </div>
+                
+                <div class="p-4 border-t border-gray-600">
+                    <div class="flex space-x-2">
+                        <input type="text" id="chatInput" placeholder="Type your message..." 
+                               class="flex-1 bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                        <button id="sendChatBtn" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Proof Upload Modal -->
+    <div id="proofModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md p-8">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold mb-2" data-i18n="proof.title">Upload Payment Proof</h2>
+                    <p class="text-gray-400" data-i18n="proof.description">Please upload your payment screenshot</p>
+                </div>
+                
+                <form id="proofForm" class="space-y-6">
+                    <div class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center">
+                        <input type="file" id="proofFile" accept="image/*" class="hidden">
+                        <div id="dropZone" class="cursor-pointer">
+                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="text-gray-400 mb-2" data-i18n="proof.drop">Click or drag to upload</p>
+                            <p class="text-sm text-gray-500" data-i18n="proof.format">JPG, PNG, WebP (Max 10MB)</p>
+                        </div>
+                        <div id="imagePreview" class="hidden">
+                            <img class="max-w-full h-48 object-contain mx-auto rounded">
+                            <button type="button" id="removeImage" class="mt-2 text-red-400 hover:text-red-300 text-sm" data-i18n="proof.remove">Remove</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button type="button" id="cancelProof" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-colors" data-i18n="common.cancel">
+                            Cancel
+                        </button>
+                        <button type="submit" id="uploadProofBtn" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-colors" data-i18n="proof.upload">
+                            Upload Proof
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center">
+        <div class="bg-gray-800 rounded-xl p-8 text-center">
+            <div class="animate-spin w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p class="text-lg font-semibold" data-i18n="common.loading">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+    <!-- Scripts -->
+    <script src="/src/js/firebase.js"></script>
+    <script src="/src/js/i18n.js"></script>
+    <script src="/src/js/auth.js"></script>
+    <script src="/src/js/config.js"></script>
+    <script src="/src/js/captcha.js"></script>
+    <script src="/src/js/payment.js"></script>
+    <script src="/src/js/chat.js"></script>
+    <script src="/src/js/main.js"></script>
+</body>
+</html>
