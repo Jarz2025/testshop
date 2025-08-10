@@ -1,0 +1,38 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Payment proofs - can be uploaded by order owner, read by admins and owner
+    match /proofs/{orderId}/{fileName} {
+      allow read: if request.auth != null && (
+        resource.metadata.uploadedBy == request.auth.uid ||
+        isAdmin(request.auth.uid)
+      );
+      allow write: if request.auth != null && 
+        request.resource.size < 10 * 1024 * 1024 && // 10MB limit
+        request.resource.contentType.matches('image/.*');
+    }
+    
+    // Captcha assets - read by all, write by admins only
+    match /captcha_assets/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin(request.auth.uid);
+    }
+    
+    // QR codes for payment methods - read by all, write by admins
+    match /payment_qr/{fileName} {
+      allow read: if true;
+      allow write: if request.auth != null && isAdmin(request.auth.uid);
+    }
+    
+    // Default deny
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+// Helper function to check admin status
+function isAdmin(uid) {
+  return exists(/databases/(default)/documents/admins/$(uid)) &&
+         get(/databases/(default)/documents/admins/$(uid)).data.isAdmin == true;
+}
