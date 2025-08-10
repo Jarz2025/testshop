@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Growtopia Shop</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 shadow-xl border-b border-emerald-500/20">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-emerald-400">Admin Panel</h1>
+                        <p class="text-gray-400 text-sm">Growtopia Shop Management</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="adminEmail" class="text-sm text-gray-400"></span>
+                    <button id="logoutBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition-colors">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-gray-800/50 border-b border-gray-700">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1">
+                <button class="tab-btn active" data-tab="orders">Orders</button>
+                <button class="tab-btn" data-tab="config">Configuration</button>
+                <button class="tab-btn" data-tab="products">Products</button>
+                <button class="tab-btn" data-tab="payments">Payment Methods</button>
+                <button class="tab-btn" data-tab="captcha">Captcha</button>
+                <button class="tab-btn" data-tab="support">Support</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Orders Tab -->
+        <div id="ordersTab" class="tab-content active">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Order Management</h2>
+                    <div class="flex space-x-4">
+                        <select id="statusFilter" class="bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                            <option value="">All Statuses</option>
+                            <option value="pending_confirmation">Pending</option>
+                            <option value="awaiting_admin_review">Under Review</option>
+                            <option value="processed">Processed</option>
+                            <option value="declined">Declined</option>
+                        </select>
+                        <input type="date" id="dateFilter" class="bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                    </div>
+                </div>
+
+                <!-- Orders List -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-600">
+                                <th class="text-left py-3 px-2">Order ID</th>
+                                <th class="text-left py-3 px-2">Customer</th>
+                                <th class="text-left py-3 px-2">Category</th>
+                                <th class="text-left py-3 px-2">Amount</th>
+                                <th class="text-left py-3 px-2">Status</th>
+                                <th class="text-left py-3 px-2">Date</th>
+                                <th class="text-left py-3 px-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center py-8 text-gray-400">Loading orders...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuration Tab -->
+        <div id="configTab" class="tab-content hidden">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Website Settings -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                    <h3 class="text-xl font-bold mb-4">Website Settings</h3>
+                    <form id="websiteConfigForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Website Name</label>
+                            <input type="text" id="websiteName" class="form-input" placeholder="Enter website name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Fee Percentage (%)</label>
+                            <input type="number" id="feePercent" class="form-input" min="0" max="100" step="0.1">
+                        </div>
+                        <button type="submit" class="btn-primary">Save Settings</button>
+                    </form>
+                </div>
+
+                <!-- Pricing Settings -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                    <h3 class="text-xl font-bold mb-4">RGT Pricing</h3>
+                    <form id="rgtPricingForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Diamond Lock Price (IDR)</label>
+                            <input type="number" id="dlPrice" class="form-input" min="0">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Blue Gem Lock Price (IDR)</label>
+                            <input type="number" id="bglPrice" class="form-input" min="0">
+                        </div>
+                        <button type="submit" class="btn-primary">Update Prices</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div id="productsTab" class="tab-content hidden">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">RPS Items Management</h2>
+                    <button id="addRPSItemBtn" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg transition-colors">
+                        Add New Item
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-600">
+                                <th class="text-left py-3 px-2">Key</th>
+                                <th class="text-left py-3 px-2">Name (EN)</th>
+                                <th class="text-left py-3 px-2">Name (ID)</th>
+                                <th class="text-left py-3 px-2">Price</th>
+                                <th class="text-left py-3 px-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rpsItemsTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center py-8 text-gray-400">Loading items...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods Tab -->
+        <div id="paymentsTab" class="tab-content hidden">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Payment Methods</h2>
+                    <button id="addPaymentMethodBtn" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg transition-colors">
+                        Add Method
+                    </button>
+                </div>
+
+                <div id="paymentMethodsList" class="space-y-4">
+                    <!-- Payment methods will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Captcha Tab -->
+        <div id="captchaTab" class="tab-content hidden">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Captcha Management</h2>
+                    <div class="flex space-x-4">
+                        <select id="captchaMode" class="bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                            <option value="manual">Manual Captcha</option>
+                            <option value="google">Google reCAPTCHA</option>
+                        </select>
+                        <button id="uploadCaptchaBtn" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg transition-colors">
+                            Upload New
+                        </button>
+                    </div>
+                </div>
+
+                <div id="captchaAssets" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Captcha assets will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Tab -->
+        <div id="supportTab" class="tab-content hidden">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Support Tickets -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                    <h3 class="text-xl font-bold mb-4">Support Tickets</h3>
+                    <div id="supportTickets" class="space-y-4">
+                        <div class="text-center py-8 text-gray-400">No open tickets</div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Base -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold">Knowledge Base</h3>
+                        <button id="addKBItemBtn" class="bg-emerald-600 hover:bg-emerald-700 px-2 py-1 rounded text-sm">
+                            Add KB Item
+                        </button>
+                    </div>
+                    <div id="knowledgeBase" class="space-y-3">
+                        <!-- KB items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-screen overflow-y-auto">
+                <div class="p-6 border-b border-gray-600">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Order Details</h2>
+                        <button id="closeOrderModal" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="orderDetailsContent" class="p-6">
+                    <!-- Order details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic Modal for Forms -->
+    <div id="genericModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-gray-800 rounded-xl shadow-2xl w-full max-w-md">
+                <div class="p-6 border-b border-gray-600">
+                    <div class="flex justify-between items-center">
+                        <h2 id="modalTitle" class="text-xl font-bold">Modal Title</h2>
+                        <button id="closeGenericModal" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="modalContent" class="p-6">
+                    <!-- Modal content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center">
+        <div class="bg-gray-800 rounded-xl p-8 text-center">
+            <div class="animate-spin w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p class="text-lg font-semibold">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="messageContainer" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+    <!-- Scripts -->
+    <script src="/src/js/firebase.js"></script>
+    <script src="/src/js/admin.js"></script>
+
+    <style>
+        .tab-btn {
+            @apply px-6 py-3 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors;
+        }
+        
+        .tab-btn.active {
+            @apply text-emerald-400 bg-gray-700 border-b-2 border-emerald-500;
+        }
+        
+        .tab-content {
+            @apply animate-fade-in;
+        }
+        
+        .form-input {
+            @apply w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-transparent;
+        }
+        
+        .btn-primary {
+            @apply bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-lg transition-colors;
+        }
+        
+        .btn-danger {
+            @apply bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors;
+        }
+        
+        .status-badge {
+            @apply px-2 py-1 rounded-full text-xs font-semibold;
+        }
+        
+        .status-pending { @apply bg-yellow-600/20 text-yellow-400; }
+        .status-review { @apply bg-blue-600/20 text-blue-400; }
+        .status-processed { @apply bg-green-600/20 text-green-400; }
+        .status-declined { @apply bg-red-600/20 text-red-400; }
+    </style>
+</body>
+</html>
